@@ -1,6 +1,5 @@
 # Dependency directories
 node_modules/
-jspm_packages/
 
 # Optional npm cache directory
 .npm
@@ -14,5 +13,3 @@ jspm_packages/
 # IDEA stuff
 .idea
 
-# IDK what this is
-pizar-site.iml

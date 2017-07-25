@@ -1,0 +1,22 @@
+{
+  "name": "pizar-site",
+  "version": "1.0.0",
+  "description": "Pizar's site",
+  "main": "index.js",
+  "scripts": {
+    "start": "cd server && node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ThePizar/pizar-site.git"
+  },
+  "dependencies": {
+    "express": "^4.15.3",
+    "body-parser": "^1.17.2"
+  },
+  "author": "Pizar",
+  "bugs": {
+    "url": "https://github.com/ThePizar/pizar-site/issues"
+  },
+  "homepage": "https://github.com/ThePizar/pizar-site#readme"
+}
