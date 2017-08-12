@@ -1,15 +1,12 @@
-# Dependency directories
+.DS_Store
 node_modules/
+client/dist/
+npm-debug.log
+yarn-error.log
 
-# Optional npm cache directory
-.npm
-
-# Output of 'npm pack'
-*.tgz
-
-# dotenv environment variables file
-.env
-
-# IDEA stuff
+# Editor directories and files
 .idea
-
+*.suo
+*.ntvs*
+*.njsproj
+*.sln

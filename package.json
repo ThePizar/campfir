@@ -4,16 +4,31 @@
   "description": "Pizar's site",
   "main": "index.js",
   "scripts": {
-    "start": "cd server && node index.js"
+    "start": "cd server && node index.js",
+    "dev": "cd client && cross-env NODE_ENV=development webpack-dev-server --open --hot",
+    "build": "cd client && cross-env NODE_ENV=production webpack --progress --hide-modules"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ThePizar/pizar-site.git"
   },
   "dependencies": {
-    "express": "^4.15.3",
     "body-parser": "^1.17.2",
-    "compression": "^1.7.0"
+    "compression": "^1.7.0",
+    "express": "^4.15.4",
+    "vue": "^2.3.3"
+  },
+  "devDependencies": {
+    "babel-core": "^6.0.0",
+    "babel-loader": "^6.0.0",
+    "babel-preset-env": "^1.5.1",
+    "cross-env": "^3.0.0",
+    "css-loader": "^0.25.0",
+    "file-loader": "^0.9.0",
+    "vue-loader": "^12.1.0",
+    "vue-template-compiler": "^2.3.3",
+    "webpack": "^2.6.1",
+    "webpack-dev-server": "^2.4.5"
   },
   "author": "Pizar",
   "bugs": {
