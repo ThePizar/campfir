@@ -7,19 +7,19 @@
         <router-link to="/poems" class="navbar-item">Poetry</router-link>
       </div>
     </nav>
-    <h1 class="large has-text-centered" style="font-size: 48px">{{ msg }}</h1>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-export default {
-  name: 'app',
-  data () {
-    return {
-      msg: 'Welcome to Pizar\'s Site'
+  export default {
+    name: 'app',
+    data () {
+      return {
+        msg: 'Welcome to Pizar\'s Site'
+      }
     }
   }
-}
 </script>
 
 <style scoped>
