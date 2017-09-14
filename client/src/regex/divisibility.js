@@ -4,6 +4,20 @@
  * @param divisor divider
  */
 function divisibilityRegex (base, divisor) {
+  let graph = createGraph(divisor);
+  populateGraph(graph, base, divisor);
+  console.log('start');
+  console.dir(graph);
+  for (let i = divisor; i >= 2; i--) {
+    reduceOutNode(graph, i);
+    console.log(i);
+    console.dir(graph);
+  }
+  // console.log('final');
+  // console.dir(graph);
+  let regexStr = '^(' + graph[0][1] + ')*$';
+  console.log(regexStr);
+  return new RegExp(regexStr);
 }
 
 /**
@@ -49,14 +63,24 @@ function populateGraph (graph, base, divisor) {
         edge = move;
       }
       else {
-        edge += '|' + move;
+        edge = '(' + edge + '|' + move + ')';
       }
       graph[modulo + 1][dest + 1] = edge;
     }
   }
 }
 
-function reduceGraph (rip) {
+function reduceOutNode (graph, rip) {
+  for (let i = 0; i < graph.length; i++) {
+    for (let j = 0; j < graph.length; j++) {
+      if (rip !== i && rip !== j) {
+        // console.log(rip, i, j);
+        tripletReduction(graph, rip, i, j);
+        // console.dir(graph);
+      }
+    }
+  }
+  clearConnections(graph, rip);
 }
 
 /**
@@ -73,15 +97,39 @@ function tripletReduction (graph, rip, i, j) {
   let R2 = graph[rip][rip];
   let R3 = graph[rip][j];
   let R4 = graph[i][j];
-  //TODO figure out edge cases of this
   
-  //Compute new Regex
-  let cyclic = R2 ? R2 + '*' : R2;
-  let around = R1 + cyclic + R3;
-  let full = around === "" ? R4 : around + '|' + R4;
+  // console.log(R1, R2, R3, R4);
   
-  let altFull = '((' + R1 + ')(' + R2 + ')*(' + R3 + '))|(' + R4 + ')';
-  graph[i][j] = altFull;
+  //Only continue if path exists from i -> rip and rip -> j
+  if (R1 !== null && R3 !== null) {
+    //Compute new Regex
+    let cyclic = addStarProtector(R2);
+    let around = R1 + cyclic + R3;
+    
+    let orig = (R4 === null ? '' : '|' + R4);
+    if (i === j) {
+      orig = addStarProtector(orig);
+    }
+  
+    let altFull = '(' +around + ')' + orig;
+  
+    if (altFull.match(/\*\*/)) {
+      console.log('err');
+      console.log(R1, R2, R3, R4);
+    }
+    // console.log(altFull);
+    graph[i][j] = altFull;
+  }
+}
+
+function addStarProtector (str) {
+  if (!str) {
+    return "";
+  }
+  if (str.charAt && str.charAt(str.length) === "*") {
+    return '(' + str + ')*'
+  }
+  return str + '*';
 }
 
 /**
@@ -92,14 +140,27 @@ function tripletReduction (graph, rip, i, j) {
  */
 function clearConnections (graph, rip) {
   for (let i = 0; i < graph.length; i++) {
-    for (let j = 0; j < graph[i].length; j++) {
-      graph[i][j] = null;
-    }
+    graph[i][rip] = null;
+    graph[rip][i] = null;
   }
 }
 
-let graph = createGraph(3);
-populateGraph(graph, 2, 3);
-console.dir(graph);
+let reg = divisibilityRegex(2, 4);
+
+let test1 = "101"; //5
+let test2 = "110"; //6
+let test3 = "111"; //7
+let test4 = "1001"; //9
+let test5 = "10101110"; //174
+let test6 = "10101111"; //175
+let test7 = "111001"; //56
+
+console.log(!!test1.match(reg));
+console.log(!!test2.match(reg));
+console.log(!!test3.match(reg));
+console.log(!!test4.match(reg));
+console.log(!!test5.match(reg));
+console.log(!!test6.match(reg));
+console.log(!!test7.match(reg));
 
 //export default divisibilityRegex;
