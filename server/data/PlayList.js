@@ -1,3 +1,7 @@
+const AddedSong = require('./AddedSong');
+const BasicUser = require('./BasicUser');
+const source = require('./source');
+
 
 class PlayList {
   /**
@@ -63,6 +67,22 @@ class PlayList {
    */
   get user () {
     return this._user;
+  }
+  
+  /**
+   * Gets the specific playlist
+   *
+   * @param id
+   * @returns {Promise.<PlayList>}
+   */
+  static getPlaylist(id) {
+    return source.playLists.getPlaylist(id).then(pl => {
+      let songs = pl.songs.map(song => {
+        return new AddedSong(song.id, song.name, song.artist, song.external, song.timestamp);
+      });
+      let user = new BasicUser(pl.user.id, pl.user.name);
+      return new PlayList(id, pl.hash, songs, user);
+    });
   }
 }
 
