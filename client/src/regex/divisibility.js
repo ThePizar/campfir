@@ -112,11 +112,6 @@ function tripletReduction (graph, rip, i, j) {
     }
   
     let altFull = '(' +around + ')' + orig;
-  
-    if (altFull.match(/\*\*/)) {
-      console.log('err');
-      console.log(R1, R2, R3, R4);
-    }
     // console.log(altFull);
     graph[i][j] = altFull;
   }
@@ -126,10 +121,12 @@ function addStarProtector (str) {
   if (!str) {
     return "";
   }
-  if (str.charAt && str.charAt(str.length) === "*") {
-    return '(' + str + ')*'
+  let ret = str + '';
+  if (ret.charAt(ret.length - 1) === "*") {
+    ret = '(' + ret + ')';
   }
-  return str + '*';
+  ret += '*';
+  return ret;
 }
 
 /**
@@ -147,7 +144,7 @@ function clearConnections (graph, rip) {
 
 let reg = divisibilityRegex(2, 4);
 
-let test1 = "101"; //5
+let test1 = "101"; //5 from base 2
 let test2 = "110"; //6
 let test3 = "111"; //7
 let test4 = "1001"; //9
