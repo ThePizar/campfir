@@ -17,13 +17,50 @@ class Song {
     this._external = external;
   }
   
+  /**
+   * A pure Object of this song
+   *
+   * @returns {{id: Number, name: String, artist: String, external: {spotify: Object, youtube: Object}}}
+   */
   simplify () {
     return {
-      id: this._id,
-      name: this._name,
-      artist: this._artist,
-      external: this._external
+      id: this.id,
+      name: this.name,
+      artist: this.artist,
+      external: this.external
     }
+  }
+  
+  /**
+   *
+   * @returns {Number}
+   */
+  get id () {
+    return this._id;
+  }
+  
+  /**
+   *
+   * @returns {String}
+   */
+  get name () {
+    return this._name;
+  }
+  
+  /**
+   *
+   * @returns {String}
+   */
+  get artist () {
+    return this._artist;
+  }
+  
+  /**
+   *
+   * @returns {{spotify: Object, youtube: Object}}
+   */
+  get external () {
+    return this._external;
   }
 }
 

@@ -17,10 +17,22 @@ class AddedSong extends Song {
     this._timestamp = timestamp;
   }
   
+  /**
+   *
+   * @returns {{id: Number, name: String, artist: String, external: {spotify: Object, youtube: Object}, timestamp: Number}}
+   */
   simplify () {
     let song = super.simplify();
-    song.timestamp = this._timestamp;
+    song.timestamp = this.timestamp;
     return song;
+  }
+  
+  /**
+   *
+   * @returns {Number}
+   */
+  get timestamp () {
+    return this._timestamp;
   }
 }
 

@@ -15,8 +15,14 @@ class PlayList {
     this._user = user;
   }
   
+  /**
+   *
+   * @returns {{id: Number, hash: Number, songs: {id: Number, name: String, artist: String, external: {spotify: Object, youtube: Object}, timestamp: Number}[], user: {id: Number, name: String}}}
+   */
   simplify () {
-    let songs = this.songs; //TODO: Run simplify across songs
+    let songs = this.songs.map(song => {
+      return song.simplify();
+    });
     return {
       id: this.id,
       hash: this.hash,
@@ -45,12 +51,16 @@ class PlayList {
   
   /**
    *
-   * @returns {AddedSong[]|*}
+   * @returns {AddedSong[]}
    */
   get songs () {
     return this._songs;
   }
   
+  /**
+   *
+   * @returns {BasicUser}
+   */
   get user () {
     return this._user;
   }
