@@ -2,7 +2,6 @@ const AddedSong = require('./AddedSong');
 const BasicUser = require('./BasicUser');
 const source = require('./source');
 
-
 class PlayList {
   /**
    * A playlist of Songs belonging to a particular User
