@@ -8,19 +8,21 @@ class PlayList {
    *
    * @param id {Number}
    * @param hash {String}
+   * @param name {String}
    * @param songs {AddedSong[]}
    * @param user {BasicUser}
    */
-  constructor (id, hash, songs, user) {
+  constructor (id, hash, name, songs, user) {
     this._id = id;
     this._hash = hash;
+    this._name = name;
     this._songs = songs;
     this._user = user;
   }
   
   /**
    *
-   * @returns {{id: Number, hash: Number, songs: {id: Number, name: String, artist: String, external: {spotify: Object, youtube: Object}, timestamp: Number}[], user: {id: Number, name: String}}}
+   * @returns {{id: Number, hash: Number, name: String, songs: {id: Number, name: String, artist: String, external: {spotify: Object, youtube: Object}, timestamp: Number}[], user: {id: Number, name: String}}}
    */
   simplify () {
     let songs = this.songs.map(song => {
@@ -29,6 +31,7 @@ class PlayList {
     return {
       id: this.id,
       hash: this.hash,
+      name: this.name,
       songs: songs,
       user: this.user.simplify()
     }
@@ -53,6 +56,15 @@ class PlayList {
   }
   
   /**
+   * The name of the playlist
+   *
+   * @returns {String}
+   */
+  get name () {
+    return this._name;
+  }
+  
+  /**
    *
    * @returns {AddedSong[]}
    */
@@ -71,16 +83,16 @@ class PlayList {
   /**
    * Gets the specific playlist
    *
-   * @param id
+   * @param playListId {Number}
    * @returns {Promise.<PlayList>}
    */
-  static getPlaylist(id) {
-    return source.playLists.getPlaylist(id).then(pl => {
+  static getPlaylist(playListId) {
+    return source.playLists.getPlaylist(playListId).then(pl => {
       let songs = pl.songs.map(song => {
         return new AddedSong(song.id, song.name, song.artist, song.external, song.timestamp);
       });
       let user = new BasicUser(pl.user.id, pl.user.name);
-      return new PlayList(id, pl.hash, songs, user);
+      return new PlayList(playListId, pl.hash, pl.name, songs, user);
     });
   }
 }

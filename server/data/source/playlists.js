@@ -7,6 +7,7 @@ function getPlaylist (id) {
   return Promise.resolve({
     id: id,
     hash: '12ab34cd',
+    name: 'Sample list 1',
     songs: [
       {
         id: 6,

@@ -1,4 +1,5 @@
 const BasicUser = require('./BasicUser');
+const PlayList = require('./PlayList');
 
 //TODO: do acquire queries
 class User extends BasicUser {
@@ -15,7 +16,9 @@ class User extends BasicUser {
   constructor (id, name, playlists, followings) {
     super(id, name);
     this._playlists = playlists || [];
-    this._followings = followings || [];
+    this._followings = followings || {};
+    if(!this._followings.users) this._followings.users = [];
+    if(!this._followings.lists) this._followings.lists = [];
   }
   
   /**
@@ -34,6 +37,9 @@ class User extends BasicUser {
    */
   simplify () {
     let basic = this.basic;
+    basic.playLists = this.playlists.map(list => {
+      return list.simplify();
+    });
     let followings = {};
     followings.users = this.followings.users.map(basic => {
       return basic.simplify();
@@ -69,6 +75,21 @@ class User extends BasicUser {
   
   acquireFollowings () {
     //Do query
+  }
+  
+  /**
+   * Get the playlists of the given user
+   *
+   * @param userId {Number}
+   * @returns {Promise.<User>}
+   */
+  static getUser(userId) {
+    let list = [];
+    list.push(PlayList.getPlaylist(1));
+    list.push(PlayList.getPlaylist(2));
+    return Promise.all(list).then(playLists => {
+      return new User(userId, 'Joshua Michel', playLists, []);
+    })
   }
 }
 
