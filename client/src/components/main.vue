@@ -4,7 +4,7 @@
     <div class="column">
       <h1 class="large has-text-centered title is-1">Music feed</h1>
       <div class="tile is-ancestor">
-        <div class="is-parent">
+        <div class="tile is-parent is-9">
           <div class="tile is-child box" v-for="entry in entries">
             {{entry.name}}
           </div>

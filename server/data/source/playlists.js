@@ -3,6 +3,12 @@ module.exports = {
   getPlaylist
 };
 
+/**
+ * Get the playlist
+ *
+ * @param id
+ * @returns {Promise.<{id: *, hash: string, name: string, songs: [null], user: {id: number, name: string}}>}
+ */
 function getPlaylist (id) {
   return Promise.resolve({
     id: id,
