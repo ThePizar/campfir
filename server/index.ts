@@ -1,6 +1,6 @@
-import app from './app';
+import {App} from './app';
 
 let port = 3000;
 
-app.listen(port);
+App.listen(port);
 console.log('Listening on port', port, '...');

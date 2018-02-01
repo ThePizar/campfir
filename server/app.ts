@@ -1,9 +1,9 @@
-import express from 'express';
+import express = require ('express');
 let app = express();
-import bodyParser from 'body-parser';
-import compression from 'compression';
+import bodyParser = require ('body-parser');
+import compression = require ('compression');
+import cors = require ('cors');
 import router from './api';
-import cors from 'cors';
 
 app.use(bodyParser.json({strict: false}));
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -19,4 +19,4 @@ app.get('/', function (req, res) {
   res.send('Hello World')
 });
 
-export default app;
+export {app as App};

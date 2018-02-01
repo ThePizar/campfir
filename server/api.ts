@@ -1,4 +1,4 @@
-import * as express from 'express';
+import express = require ('express');
 let router = express.Router();
 import config from './config';
 import { PlayList } from './data/PlayList';
