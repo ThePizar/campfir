@@ -1,8 +1,8 @@
-let express = require('express');
+import * as express from 'express';
 let router = express.Router();
-let config = require('./config');
-let PlayList = require('./data/PlayList');
-let User = require('./data/User');
+import config from './config';
+import { PlayList } from './data/PlayList';
+import { User } from './data/User';
 
 router.get('/', (req, res) => {
   res.json(config.version);
@@ -33,7 +33,7 @@ router.get('/user/:userId/playlists', (req, res) => {
   User.getUser(userId).then(user => {
     res.json({
       success: true,
-      playlists: user.simplify().playLists
+      playlists: user.simplify().playlists
     })
   }).catch(err => {
     console.log(err);
@@ -44,4 +44,4 @@ router.get('/user/:userId/playlists', (req, res) => {
   });
 });
 
-module.exports = router;
+export default router;

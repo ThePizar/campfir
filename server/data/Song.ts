@@ -4,6 +4,13 @@ export interface External {
   youtube: any;
 }
 
+let base: External = {
+  spotify: {},
+  youtube: {}
+};
+
+export {base as BaseExternal}
+
 export class Song {
   public id: Number;
   public name: String;

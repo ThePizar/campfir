@@ -1,15 +1,15 @@
-let express = require('express');
+import express from 'express';
 let app = express();
-let bodyParser = require('body-parser');
-let compression = require('compression');
-let router = require('./api');
-const cors = require('cors');
+import bodyParser from 'body-parser';
+import compression from 'compression';
+import router from './api';
+import cors from 'cors';
 
 app.use(bodyParser.json({strict: false}));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requestedw-With, Content-Type, Accept");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 });
 
@@ -19,4 +19,4 @@ app.get('/', function (req, res) {
   res.send('Hello World')
 });
 
-module.exports = app;
+export default app;

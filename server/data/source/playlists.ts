@@ -1,7 +1,4 @@
-
-module.exports = {
-  getPlaylist
-};
+import {BaseExternal} from '../Song'
 
 /**
  * Get the playlist
@@ -9,7 +6,7 @@ module.exports = {
  * @param id
  * @returns {Promise.<{id: *, hash: string, name: string, songs: [null], user: {id: number, name: string}}>}
  */
-function getPlaylist (id) {
+export function getPlaylist (id) {
   return Promise.resolve({
     id: id,
     hash: '12ab34cd',
@@ -19,7 +16,7 @@ function getPlaylist (id) {
         id: 6,
         name: 'Radioactive',
         artist: 'Imagine Dragons',
-        external: {},
+        external: BaseExternal,
         timestamp: 1511220617748
       }
     ],

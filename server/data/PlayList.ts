@@ -1,6 +1,6 @@
 import {AddedSong} from './AddedSong';
 import {BasicUser} from './BasicUser';
-import source = require('./source');
+import * as plSource from './source/playlists';
 
 export class PlayList {
   public id: Number;
@@ -41,7 +41,7 @@ export class PlayList {
    * @returns {Promise.<PlayList>}
    */
   static getPlaylist(playListId: Number) {
-    return source.playLists.getPlaylist(playListId).then(pl => {
+    return plSource.getPlaylist(playListId).then(pl => {
       let songs = pl.songs.map(song => {
         return new AddedSong(song.id, song.name, song.artist, song.external, song.timestamp);
       });
