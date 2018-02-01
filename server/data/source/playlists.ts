@@ -4,7 +4,7 @@ import {BaseExternal} from '../Song'
  * Get the playlist
  *
  * @param id
- * @returns {Promise.<{id: *, hash: string, name: string, songs: [null], user: {id: number, name: string}}>}
+ * @returns {Promise.<{id: *, hash: string, name: string, songs: [*], user: {id: number, name: string}}>}
  */
 export function getPlaylist (id) {
   return Promise.resolve({

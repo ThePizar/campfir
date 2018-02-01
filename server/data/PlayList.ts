@@ -40,7 +40,7 @@ export class PlayList {
    * @param playListId {Number}
    * @returns {Promise.<PlayList>}
    */
-  static getPlaylist(playListId: Number) {
+  static getPlaylist(playListId: Number): Promise<PlayList> {
     return plSource.getPlaylist(playListId).then(pl => {
       let songs = pl.songs.map(song => {
         return new AddedSong(song.id, song.name, song.artist, song.external, song.timestamp);

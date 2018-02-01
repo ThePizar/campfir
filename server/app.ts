@@ -19,4 +19,4 @@ app.get('/', function (req, res) {
   res.send('Hello World')
 });
 
-export {app as App};
+export default app;

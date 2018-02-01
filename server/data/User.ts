@@ -45,7 +45,7 @@ export class User extends BasicUser {
    * @param userId {Number}
    * @returns {Promise.<User>}
    */
-  static getUser(userId) {
+  static getUser(userId): Promise<User> {
     let list = [];
     list.push(PlayList.getPlaylist(1));
     list.push(PlayList.getPlaylist(2));
